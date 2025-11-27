@@ -20,15 +20,6 @@ WORKDIR /var/www/html
 # Menyalin seluruh source code Laravel dari host ke container
 COPY . .
 
-# Menginstall dependency Laravel menggunakan composer 
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Mengatur permission agar Laravel dapat menulis ke folder storage dan cache
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
-
-# Membuka port 9000 untuk PHP-FPM
 EXPOSE 9000
 
 # Menjalankan PHP-FPM sebagai proses utama dalam container
