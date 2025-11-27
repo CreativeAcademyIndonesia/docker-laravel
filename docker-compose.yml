@@ -38,9 +38,8 @@ services:
             - "80:80" # Map port 80 host → port 80 container
 
         volumes:
-            - .:/var/www/html # Mount seluruh project ke nginx
+            - .:/var/www/html
             - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-              # Konfigurasi custom untuk Nginx
 
         depends_on:
             - app # Menunggu Laravel (app) aktif terlebih dahulu
