@@ -1,22 +1,19 @@
-version: "3.8" # Versi docker-compose yang digunakan
+version: "3.8"
 
-services: # Daftar container yang akan dijalankan
-    app: # Service utama untuk Laravel (PHP-FPM)
-        build: # Instruksi untuk build image dari Dockerfile
-            context: . # Folder project sebagai sumber build
-            dockerfile: Dockerfile # File Dockerfile yang digunakan
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel_app
+        restart: unless-stopped
 
-        container_name: laravel_app # Nama container agar mudah dikenali
-        restart: unless-stopped # Restart container kecuali dihentikan manual
-
-        working_dir: /var/www/html # Direktori kerja default dalam container
+        working_dir: /var/www/html
 
         volumes:
-            - .:/var/www/html # Mount seluruh project ke dalam container
-            - ./storage:/var/www/html/storage # Pastikan folder storage writable
-            - ./bootstrap/cache:/var/www/html/bootstrap/cache # Mount cache Laravel
+            - .:/var/www/html
 
-        environment: # Variable environment untuk Laravel
+        environment:
             - APP_ENV=production # Mode environment Laravel
             - APP_DEBUG=false # Disable debug mode
             - DB_CONNECTION=mysql # Opsi driver database
